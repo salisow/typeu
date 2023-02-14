@@ -1,21 +1,34 @@
 //
 //  ContentView.swift
 //  typeu
-//
-//  Created by Dj Typeu on 2/14/23.
-//
+//  Created by Saliou Sow on 20/03/2023.
+//  Copyright © 2023 with Swift. All rights reserved.
 
 import SwiftUI
 
 struct ContentView: View {
+    let menu = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Diadieuf")
+        NavigationStack {
+            List {
+                ForEach(menu) { section in
+                    Section(section.name) {
+                        ForEach(section.items) { item in
+                            NavigationLink(value: item) {
+                                ItemRow(item: item)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationDestination(for: MenuItem.self) { item in
+                ItemDetail(item: item)
+            }
+            .font(.headline)
+            .navigationTitle("Menu")
+            .listStyle(.grouped)
         }
-        .padding()
     }
 }
 
@@ -24,3 +37,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

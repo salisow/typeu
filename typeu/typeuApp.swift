@@ -1,17 +1,21 @@
 //
-//  typeuApp.swift
+//  tipeuApp.swift
+//
 //  typeu
+//  Created by Saliou Sow on 13/03/2023.
+//  Copyright © 2023 with Swift. All rights reserved.
 //
-//  Created by Dj Typeu on 2/14/23.
-//
-
 import SwiftUI
 
 @main
-struct typeuApp: App {
+struct tipeuApp: App {
+    @StateObject var order = Order()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(order)
         }
     }
 }
+
